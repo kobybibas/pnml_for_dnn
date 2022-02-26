@@ -1,0 +1,15 @@
+lr: 0.1
+data_dir: ../data
+
+model: resnet20_cifar10
+trainset: cifar10
+batch_size: 128 
+num_workers: 4
+epochs: 10
+
+defaults:
+    - wandb: defaults
+
+hydra:
+  run:
+    dir: ../output/${model}_${trainset}_${now:%Y%m%d_%H%M%S}
