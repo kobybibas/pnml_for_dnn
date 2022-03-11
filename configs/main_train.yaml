@@ -1,14 +1,17 @@
-lr: 0.1
 data_dir: ../data
-
 model: resnet20_cifar10
 trainset: cifar10
-batch_size: 128 
-num_workers: 4
-epochs: 10
+erm_only: false
+
+lr: 0.1
+batch_size: 128
+epochs: 50
+weight_decay: 1e-4
+milestones: [35,48]
+num_workers: 2
 
 defaults:
-    - wandb: defaults
+  - wandb: defaults
 
 hydra:
   run:
