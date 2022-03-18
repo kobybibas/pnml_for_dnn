@@ -1,0 +1,14 @@
+prune_amount: 0.5
+
+defaults:
+  - _self_
+  - wandb: defaults
+  - train: defaults
+  - dataset: defaults
+
+hydra:
+  run:
+    dir: ../output/prune_${now:%Y%m%d_%H%M%S}
+  sweep:
+    dir: ../output/
+    subdir: prune_${now:%Y%m%d_%H%M%S}_${hydra.job.num}

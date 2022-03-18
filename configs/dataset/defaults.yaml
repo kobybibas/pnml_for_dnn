@@ -1,0 +1,4 @@
+data_dir: ../data
+model: resnet20_cifar10
+trainset: cifar10
+train_val_ratio: 0.9

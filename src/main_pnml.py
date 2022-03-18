@@ -25,8 +25,8 @@ def calc_performance(probs, true_label, learner_name: str):
     }
 
 
-@hydra.main(config_path="../configs/", config_name="main_train")
-def main_train(cfg: DictConfig):
+@hydra.main(config_path="../configs/", config_name="main_pnml")
+def main_pnml(cfg: DictConfig):
     t0 = time.time()
     logger.info(cfg)
     out_dir = os.getcwd()
@@ -43,26 +43,8 @@ def main_train(cfg: DictConfig):
     logger.info(f"{classes=}")
 
     # Model
+    # TODO load preteined model
     erm_model = LitClassifier(cfg, len(classes))
-
-    # ERM Training
-    trainer = pl.Trainer(
-        max_epochs=cfg.epochs,
-        min_epochs=cfg.epochs,
-        gpus=None,
-        logger=WandbLogger(experimnet=wandb.run),
-        strategy="ddp",
-        callbacks=[
-            ModelCheckpoint(dirpath=out_dir),
-            pl.callbacks.LearningRateMonitor(),
-        ],
-    )
-    trainer.fit(erm_model, trainloader, testloader)
-    erm_model.eval()
-    logger.info(f"Finish training in {time.time()-t0:.2f} sec")
-
-    if cfg.erm_only is True:
-        return
 
     # Create logging table
     res_df = pd.DataFrame(
@@ -145,4 +127,4 @@ def main_train(cfg: DictConfig):
 
 
 if __name__ == "__main__":
-    main_train()
+    main_pnml()

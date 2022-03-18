@@ -1,7 +1,5 @@
-setup:
-    project: pnml_for_dnn
-    entity: kobybibas
-    mode: online
-watch:
-    log: all
-    log_freq: 100
+project: pnml_for_dnn
+entity: kobybibas
+mode: online
+log: all
+log_freq: 100

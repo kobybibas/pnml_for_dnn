@@ -1,0 +1,13 @@
+# @package _global_
+
+erm_path: None # For pruned arhicteucture
+
+defaults:
+  - _self_
+  - wandb: defaults
+  - train: defaults
+  - dataset: defaults
+
+hydra:
+  run:
+    dir: ../output/${model}_${trainset}_${now:%Y%m%d_%H%M%S}
