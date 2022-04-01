@@ -17,8 +17,6 @@ python main_prune.py prune_amount=0.8
 python main_prune.py prune_amount=0.85
 python main_prune.py prune_amount=0.9
 python main_prune.py prune_amount=0.95
-
-
 python main_prune.py prune_amount=0.96
 python main_prune.py prune_amount=0.97
 python main_prune.py prune_amount=0.98

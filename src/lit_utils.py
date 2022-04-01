@@ -88,6 +88,11 @@ def create_model(model_name: str, num_classes: int):
     model.apply(weight_init)
     return model
 
+def predict_single_img(model, img):
+    with torch.no_grad():
+        probs = torch.nn.functional.softmax(model(img.unsqueeze(0)), dim=-1).squeeze()
+    return probs
+
 
 class LitClassifier(pl.LightningModule):
     def __init__(self, model, cfg):

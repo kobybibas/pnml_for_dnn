@@ -1,13 +1,16 @@
 # @package _global_
-
-erm_path: None # For pruned arhicteucture
-
 defaults:
-  - _self_
   - wandb: defaults
   - train: defaults
   - dataset: defaults
+  - _self_
+
+train:
+  epochs: 40
+  milestones: [30,38]
+
+prune_amount: 0.7
 
 hydra:
   run:
-    dir: ../output/${model}_${trainset}_${now:%Y%m%d_%H%M%S}
+    dir: ../output/pnml_prune_${prune_amount}_${now:%Y%m%d_%H%M%S}
