@@ -1,0 +1,13 @@
+session_name: pnml_from_pretrained
+windows:
+  - window_name: pnml_from_pretrained
+    # layout: tiled
+    shell_command_before:
+      - cd ../src # run as a first command in all panes
+      - conda activate pnml_for_dnn
+    panes:
+      - python main_pnml_from_pretrained.py prune_amount=0.7 pnml_train.epochs=1
+      - python main_pnml_from_pretrained.py prune_amount=0.8 pnml_train.epochs=1
+      - python main_pnml_from_pretrained.py prune_amount=0.9 pnml_train.epochs=1
+      - python main_pnml_from_pretrained.py prune_amount=0.95 pnml_train.epochs=1
+      - python main_pnml_from_pretrained.py prune_amount=0.99 pnml_train.epochs=1

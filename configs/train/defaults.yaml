@@ -1,6 +1,6 @@
 lr: 0.1
 batch_size: 128
-epochs: 50
+epochs: 40
 weight_decay: 1e-4
 milestones: [35,48]
 num_workers: 4

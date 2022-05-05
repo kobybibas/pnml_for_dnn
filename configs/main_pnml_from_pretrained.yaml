@@ -1,0 +1,23 @@
+# @package _global_
+defaults:
+  - wandb: defaults
+  - train: defaults
+  - dataset: defaults
+  - _self_
+
+# train:
+#   epochs: 1
+
+pnml_train:
+  lr: 0.01 # 0.1
+  batch_size: 128
+  epochs: 3
+  weight_decay: 1e-4
+  milestones: [4]
+  num_workers: 4
+
+prune_amount: 0.9
+
+hydra:
+  run:
+    dir: ../output/pnml_from_pretrained_${prune_amount}_${now:%Y%m%d_%H%M%S}

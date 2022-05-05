@@ -3,7 +3,9 @@ data/*
 */lightning_logs/*
 */checkpoints/*
 *.ckpt
-
+*.pkl
+*.csv
+output
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,jupyternotebooks,linux,macos
