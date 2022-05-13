@@ -16,7 +16,7 @@ from lit_utils import LitClassifier, create_model
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="../configs/", config_name="main_train_erm")
+@hydra.main(config_path="../configs/", config_name="train_erm")
 def main_train_erm(cfg: DictConfig):
     t0 = time.time()
     out_dir = os.getcwd()

@@ -17,7 +17,7 @@ from training_utils import get_genie_probs, execute_train_model
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="../configs/", config_name="main_pnml")
+@hydra.main(config_path="../configs/", config_name="pnml")
 def main_pnml(cfg: DictConfig):
     t0 = time.time()
     out_dir = os.getcwd()

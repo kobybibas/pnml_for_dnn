@@ -16,8 +16,8 @@ from training_utils import get_genie_probs, execute_train_model
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="../configs/", config_name="main_pnml_from_pretrained")
-def main_pnml(cfg: DictConfig):
+@hydra.main(config_path="../configs/", config_name="pnml_from_pretrained")
+def main_pnml_from_pretrained(cfg: DictConfig):
     t0 = time.time()
     out_dir = os.getcwd()
     os.chdir(hydra.utils.get_original_cwd())
@@ -28,7 +28,7 @@ def main_pnml(cfg: DictConfig):
         project=cfg.wandb.project,
         dir=out_dir,
         config=OmegaConf.to_container(cfg),
-        job_type="pnml_from_pretrained",
+        job_type=cfg.job_type,
         name=name,
     )
     logger.info(f"out_dir={out_dir}")
@@ -40,6 +40,7 @@ def main_pnml(cfg: DictConfig):
         cfg.train.batch_size,
         cfg.train.num_workers,
         cfg.dataset.train_val_ratio,
+        cfg.labels_to_keep
     )
     for loader in [trainloader, valloader, testloader, pnml_train_loader]:
         logger.info(f"{len(loader.dataset)=}")
@@ -52,8 +53,14 @@ def main_pnml(cfg: DictConfig):
 
     # ERM training
     erm_lit_model = execute_train_model(
-        cfg.train,cfg.prune_amount,  model_init, trainloader, is_print=True 
-    ) 
+        cfg.train,
+        cfg.prune_amount,
+        model_init,
+        trainloader,
+        valloader,
+        out_dir=out_dir,
+        is_print=True,
+    )
     erm_model = erm_lit_model.model
 
     # Create logging table
@@ -70,11 +77,11 @@ def main_pnml(cfg: DictConfig):
 
         genie_probs = get_genie_probs(
             cfg.pnml_train,
-            prune_amount=1e-6, # Small amount so effectivly not prunning on top of ERM.
+            prune_amount=1e-6,  # Small amount so effectivly not prunning on top of ERM.
             model_init=erm_model,
             pnml_trainloader=pnml_train_loader,
             num_classes=num_classes,
-            is_print=False
+            is_print=False,
         )
         result_tracker_h.calc_test_sample_performance(
             test_idx, test_true_label, genie_probs, erm_probs
@@ -83,8 +90,8 @@ def main_pnml(cfg: DictConfig):
         logger.info(
             f"[{test_idx}/{pnml_train_loader.dataset.num_test_samples -1}] Finish in {time.time()-t1:.2f} sec"
         )
-    logger.info(f'Finish in {time.time()-t0:.2f} ')
+    logger.info(f"Finish in {time.time()-t0:.2f} ")
 
 
 if __name__ == "__main__":
-    main_pnml()
+    main_pnml_from_pretrained()

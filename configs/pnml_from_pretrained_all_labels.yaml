@@ -1,0 +1,30 @@
+# @package _global_
+defaults:
+  - wandb: defaults
+  - train: defaults
+  - dataset: defaults
+  - _self_
+
+train:
+  lr: 0.1
+  batch_size: 128
+  epochs: 120
+  weight_decay: 1e-4
+  milestones: [50, 130]
+  num_workers: 4
+
+pnml_train:
+  lr: 0.01 # 0.1
+  batch_size: 128
+  epochs: 3
+  weight_decay: 1e-4
+  milestones: [4]
+  num_workers: 4
+
+prune_amount: 0.9
+labels_to_keep: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+job_type: pnml_from_pretrained_all_labels
+hydra:
+  run:
+    dir: ../output/pnml_from_pretrained_all_labels${prune_amount}_${now:%Y%m%d_%H%M%S}

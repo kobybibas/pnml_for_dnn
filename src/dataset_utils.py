@@ -78,9 +78,14 @@ def keep_only_label_subset(dataset, labels_to_keep: list):
 
 
 def get_dataloadrs(
-    data_dir: str, batch_size: int, num_workers: int, train_val_ratio: float
+    data_dir: str,
+    batch_size: int,
+    num_workers: int,
+    train_val_ratio: float,
+    labels_to_keep=None,
 ):
-    labels_to_keep = [0, 1]
+    if labels_to_keep is None:
+        labels_to_keep = [0, 1]
     train_dataset = CIFAR10(
         root=data_dir, train=True, download=True, transform=train_transform
     )

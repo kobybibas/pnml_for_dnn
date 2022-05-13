@@ -5,11 +5,8 @@ defaults:
   - dataset: defaults
   - _self_
 
-# train:
-#   epochs: 1
-
 pnml_train:
-  lr: 0.01 # 0.1
+  lr: 0.01
   batch_size: 128
   epochs: 3
   weight_decay: 1e-4
@@ -17,7 +14,9 @@ pnml_train:
   num_workers: 4
 
 prune_amount: 0.9
+labels_to_keep: [0, 1]
 
+job_type: pnml_from_pretrained
 hydra:
   run:
     dir: ../output/pnml_from_pretrained_${prune_amount}_${now:%Y%m%d_%H%M%S}

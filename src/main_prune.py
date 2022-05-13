@@ -15,7 +15,7 @@ from lit_utils import LitClassifier, create_model
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(config_path="../configs/", config_name="main_prune")
+@hydra.main(config_path="../configs/", config_name="prune")
 def main_prune(cfg: DictConfig):
     t0 = time.time()
     out_dir = os.getcwd()
