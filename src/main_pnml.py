@@ -2,7 +2,7 @@ import logging
 import os
 import os.path as osp
 import time
-from result_utils import ResultTracker
+
 import hydra
 import pandas as pd
 import pytorch_lightning as pl
@@ -12,7 +12,8 @@ from omegaconf import DictConfig, OmegaConf
 
 from dataset_utils import get_dataloadrs
 from lit_utils import create_model, predict_single_img
-from training_utils import get_genie_probs, execute_train_model
+from result_utils import ResultTracker
+from training_utils import execute_train_model, get_genie_probs
 
 logger = logging.getLogger(__name__)
 

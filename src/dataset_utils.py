@@ -132,7 +132,10 @@ def get_dataloadrs(
     )
 
     pnml_train_loader = DataLoader(
-        pnml_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers,
+        pnml_dataset,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
     )
 
     classes = np.array(
@@ -153,4 +156,3 @@ def get_dataloadrs(
     classes = classes[labels_to_keep]
 
     return train_loader, val_loader, test_loader, pnml_train_loader, classes
-

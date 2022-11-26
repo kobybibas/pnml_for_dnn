@@ -2,16 +2,18 @@ import logging
 import os
 import os.path as osp
 import time
-from result_utils import ResultTracker
+
 import hydra
 import pandas as pd
 import pytorch_lightning as pl
 import torch
 import wandb
 from omegaconf import DictConfig, OmegaConf
+
 from dataset_utils import get_dataloadrs
 from lit_utils import create_model, predict_single_img
-from training_utils import get_genie_probs, execute_train_model
+from result_utils import ResultTracker
+from training_utils import execute_train_model, get_genie_probs
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +42,7 @@ def main_pnml_from_pretrained(cfg: DictConfig):
         cfg.train.batch_size,
         cfg.train.num_workers,
         cfg.dataset.train_val_ratio,
-        cfg.labels_to_keep
+        cfg.labels_to_keep,
     )
     for loader in [trainloader, valloader, testloader, pnml_train_loader]:
         logger.info(f"{len(loader.dataset)=}")

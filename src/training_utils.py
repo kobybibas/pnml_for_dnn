@@ -1,11 +1,12 @@
 import copy
 import logging
+
 import pytorch_lightning as pl
 import torch
-from pytorch_lightning.callbacks import ModelPruning, ModelCheckpoint
+from pytorch_lightning.callbacks import ModelCheckpoint, ModelPruning
 from pytorch_lightning.loggers import WandbLogger
-from lit_utils import LitClassifier, predict_single_img
 
+from lit_utils import LitClassifier, predict_single_img
 
 logger = logging.getLogger(__name__)
 

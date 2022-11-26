@@ -3,21 +3,20 @@ import logging
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
-from torchmetrics.functional import accuracy
 from pytorchcv.model_provider import get_model as ptcv_get_model
-import torch
 from torch.nn import init
-
+from torchmetrics.functional import accuracy
 
 logger = logging.getLogger(__name__)
 
+
 def weight_init(m):
-    '''
+    """
     Usage:
         model = Model()
         model.apply(weight_init)
     https://github.com/rahulvigneswaran/Lottery-Ticket-Hypothesis-in-Pytorch/blob/34a8c9678406a1c7dd0fec4c9f0d25d017be55fb/main.py#L325
-    '''
+    """
     if isinstance(m, nn.Conv1d):
         init.normal_(m.weight.data)
         if m.bias is not None:
@@ -87,6 +86,7 @@ def create_model(model_name: str, num_classes: int):
     model.output = nn.Linear(in_features=in_features, out_features=num_classes)
     model.apply(weight_init)
     return model
+
 
 def predict_single_img(model, img):
     with torch.no_grad():
