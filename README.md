@@ -1,9 +1,8 @@
 # pnml_for_dnn
 
 Predictive Normalized Likelihood is the universal learner that minimizes the min-max regret for the individual data case.
-However, this learner is intercable when the hypoesis class is with high capacity as deep neural networks.
-In this reposiroty, we combine pruning tecnique to effectivly reduce the hypotesis class capaccity and evalute the pNML perforamnce for it.
-
+However, this learner is intractable when the hypothesis class is with high capacity as deep neural networks.
+In this repository, we combine pruning technique to effectively reduce the hypothesis class capacity and evaluate the pNML performance for it.
 
 ## Dependencies
 The required packages are listed in the requirement.txt file.
